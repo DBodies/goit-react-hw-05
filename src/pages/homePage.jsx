@@ -1,22 +1,32 @@
 import { useEffect, useState } from "react"
-import axios from "axios";
+import { Link } from "react-router-dom";
+import Loader from "../components/loader";
+import NotFoundPage from "./notFoundPage";
+import { fetchFilms } from "../fetchFilmsAPI";
 
 export default function HomePage() {
-const [dailyMovies, setDailyMovies] = useState([])
+    const [dailyMovies, setDailyMovies] = useState([])
+    const [loader, setLoader] = useState(false)
+    const [error, setError] = useState(false)
 
     useEffect(() => {
         async function getDailyTradingFilms() {
-            const url = 'https://api.themoviedb.org/3/trending/movie/day';
+            try {
+                setLoader(true)
+                setError(false)
+                const response = await fetchFilms()
+                setDailyMovies(response)
+                console.log(response)
+            } catch (error) {
+                setError(true)
+                console.log('Something went wrong 404', error)
+            } finally {
+                setLoader(false)
+            }
 
-            const options = {
-                headers: {
-                    Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2NDU3MWJmYTVlNGViNjc1MGE1N2YyNjRkNDVmMmIyNSIsIm5iZiI6MTc0NzIzMTQ4Mi43MSwic3ViIjoiNjgyNGEyZmE2MDk3MjgzMzZhYTE2ZjBiIiwic2NvcGVzIjpbImFwaV9yZWFkIl0sInZlcnNpb24iOjF9.UvxFS8ybST1Es4DSspU7_5JwUEUZ64OF0mlrhfKpmRU'
-                }
-            };
-            
-            axios.get(url, options)
-                .then((response) => setDailyMovies(response.data.dailyMovies,  console.log(response)))
-                .catch(err => console.error(err));
+            // axios.get(url, options)
+            //     .then((response) => setDailyMovies(response.data.results,  console.log(response)))
+            //     .catch(err => console.error(err));
             
         }
         getDailyTradingFilms()
@@ -25,9 +35,13 @@ const [dailyMovies, setDailyMovies] = useState([])
     return (
         <>
             <h2>Home page</h2>
-            <ul>{dailyMovies.map(movie => {
-                <li></li>
-            })}</ul>
+            {loader && <Loader />}
+            {error && <NotFoundPage/>}
+            <ul>
+                {dailyMovies.map((movie) => {
+                   return <li key={movie.id}><Link to='/moviesPage/:movieId'>{movie.title}</Link></li>
+                })}
+            </ul>
         </>
     )
 };
