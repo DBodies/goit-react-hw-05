@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import Navigation from './components/Navigation'
+import Navigation from './components/navigation'
 import 'modern-normalize'
 import {Routes, Route} from 'react-router-dom'
 import HomePage from './pages/homePage'
