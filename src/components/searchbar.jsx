@@ -1,34 +1,48 @@
 import { Formik, Form, Field,   } from "formik"
 import { useState } from "react"
 import { CircleLoader } from "react-spinners"
-export default function SearchBar() {
+
+export default function SearchBar({onSubmit}) {
     const [searchBarField, setFieldBarField] = useState('')
     const [isLoader, setLoader] = useState(false)
 
-    const handleSearch = () => {
+    const handleSearch = (evt) => {
         setLoader(true)
-        setTimeout(() => {
-            console.log('Find your order', setFieldBarField)
-            setLoader(false)
-        },2000)
+        evt.preventDefault()
+        const topic = searchBarField.trim()
+
+        const form = evt.target
+        
+        
+        if (!topic) {
+            alert('Please choose your film')
+            return 
+        }
+        onSubmit(topic)
+        form.reset()
+        setLoader(false)
+        setFieldBarField("")
     }
     
 
     
     return (
-        <Formik>
-            <Form>
-                <Field type='text' name='text'
+
+        <div>
+            <form onSubmit={handleSearch}>
+                <input
+                    type="text"
+                    name='topic'
                     value={searchBarField}
                     placeholder='Enter the film name'
-                onChange={(e) => setFieldBarField(e.target.value)}
+                    onChange={(e) => setFieldBarField(e.target.value)}
                 />
                 {searchBarField.trim() &&
-                    (<button type="submit" onClick={handleSearch}>Search</button>)
+                    (<button type="submit">Search</button>)
                 }
                 {isLoader && <CircleLoader/>}
-            </Form>
-</Formik>
+            </form>
+        </div>
     )
 };
 

@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import Navigation from './components/navigation'
 import 'modern-normalize'
 import {Routes, Route} from 'react-router-dom'

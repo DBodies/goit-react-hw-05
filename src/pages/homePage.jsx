@@ -39,7 +39,10 @@ export default function HomePage() {
             {error && <NotFoundPage/>}
             <ul>
                 {dailyMovies.map((movie) => {
-                   return <li key={movie.id}><Link to='/moviesPage/:movieId'>{movie.title}</Link></li>
+                    return <li key={movie.id}>
+                        <Link to={`/moviesPage/${movie.id}`}>
+                            {movie.title}
+                        </Link></li>
                 })}
             </ul>
         </>
