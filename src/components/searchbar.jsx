@@ -10,7 +10,6 @@ export default function SearchBar({onSubmit}) {
         setLoader(true)
         evt.preventDefault()
         const topic = searchBarField.trim()
-
         const form = evt.target
         
         
