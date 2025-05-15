@@ -12,7 +12,6 @@ export default function SearchBar({onSubmit}) {
         const topic = searchBarField.trim()
         const form = evt.target
         
-        
         if (!topic) {
             alert('Please choose your film')
             return 

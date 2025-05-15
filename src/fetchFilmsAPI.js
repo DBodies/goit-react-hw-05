@@ -3,6 +3,7 @@ import axios from "axios";
 export const API_TOKEN = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2NDU3MWJmYTVlNGViNjc1MGE1N2YyNjRkNDVmMmIyNSIsIm5iZiI6MTc0NzIzMTQ4Mi43MSwic3ViIjoiNjgyNGEyZmE2MDk3MjgzMzZhYTE2ZjBiIiwic2NvcGVzIjpbImFwaV9yZWFkIl0sInZlcnNpb24iOjF9.UvxFS8ybST1Es4DSspU7_5JwUEUZ64OF0mlrhfKpmRU'
 const baseUrlForDailyMovie = 'https://api.themoviedb.org/3'
 export const defaultImg = 'https://image.tmdb.org/t/p/w500'
+export const defaultImgForCast = 'https://image.tmdb.org/t/p/w200'
 
 const axiosInst = axios.create({
     baseURL: baseUrlForDailyMovie,
