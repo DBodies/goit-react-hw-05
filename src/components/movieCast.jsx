@@ -4,12 +4,12 @@ import { API_TOKEN, defaultImgForCast } from "../fetchFilmsAPI"
 import axios from "axios"
 
 export default function MovieCast() {
-    const {castId} = useParams()
+    const {movieId} = useParams()
     const [casts, setCasts] = useState([])
 
     useEffect(() => {
-        if(!castId) return
-        axios.get(`https://api.themoviedb.org/3/movie/${castId}/credits`, {
+        if(!movieId) return
+        axios.get(`https://api.themoviedb.org/3/movie/${movieId}/credits`, {
             headers: {
             Authorization: `Bearer ${API_TOKEN}`
         }
@@ -17,7 +17,7 @@ export default function MovieCast() {
             console.log(res.data.cast)
                 setCasts(res.data.cast);
     }).catch((err) => console.error('Error cast', err))
-},[castId])
+},[movieId])
 
 
     return (
@@ -34,17 +34,3 @@ export default function MovieCast() {
     )
 };
 
-            /* {casts.length > 0 && 
-                <ul>
-                    {casts.map((cast) => (
-                        <li key={cast.cast_id}>
-                            {cast.profile.path && (
-                                <img src={`https://image.tmdb.org/t/p/w200${cast.profile_path}`} alt={cast.name} />
-                            )}
-                            <p>{cast.name}</p> 
-                            <p>{cast.character}</p>
-                            </li>
-                    ))}
-                </ul>
-            } */
-            
