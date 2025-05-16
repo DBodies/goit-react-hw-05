@@ -1,0 +1,15 @@
+.navWrapper {
+    display: flex;
+    gap: 40px;
+    margin-bottom: 50px;
+}
+.defaultStyles {
+    text-decoration: none;
+    transition: 250ms ease;
+}
+.navigationStyles {
+    text-decoration: none;
+    color: rgb(47, 0, 255);
+transform: scale(1.2);
+text-shadow: 0 0 5px rgb(255, 0, 0);
+}

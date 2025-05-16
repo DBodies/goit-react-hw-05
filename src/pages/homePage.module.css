@@ -1,0 +1,14 @@
+.movieList {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+}
+.listForDailyMovies {
+    text-decoration: none;
+    color: blueviolet;
+}
+.homePage {
+    font-size: 34px;
+    padding-left: 18px;
+}

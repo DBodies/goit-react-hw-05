@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react"
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import Loader from "../components/loader";
 import NotFoundPage from "./notFoundPage";
 import { fetchFilms } from "../fetchFilmsAPI";
+import styles from './homePage.module.css'
 
 export default function HomePage() {
     const [dailyMovies, setDailyMovies] = useState([])
@@ -34,15 +35,15 @@ export default function HomePage() {
 
     return (
         <>
-            <h2>Home page</h2>
+            <h2 className={styles.homePage}>Home page</h2>
             {loader && <Loader />}
             {error && <NotFoundPage/>}
-            <ul>
+            <ul className={styles.movieList}>
                 {dailyMovies.map((movie) => {
                     return <li key={movie.id}>
-                        <Link to={`/moviesPage/${movie.id}`}>
+                        <NavLink className={styles.listForDailyMovies} to={`/moviesPage/${movie.id}`}>
                             {movie.title}
-                        </Link></li>
+                        </NavLink></li>
                 })}
             </ul>
         </>

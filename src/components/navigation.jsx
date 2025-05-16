@@ -10,10 +10,10 @@ const changedStyles = ({ isActive }) => {
 
     return (
         <div>
-            <nav>
+            <nav className={styles.navWrapper}>
                 <NavLink className={changedStyles}
                     to='/'>Home page</NavLink>
-                <NavLink
+                <NavLink className={changedStyles}
                     to='/moviesPage'>Movies page</NavLink>
         </nav>
         </div>

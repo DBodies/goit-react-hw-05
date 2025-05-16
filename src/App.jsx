@@ -7,12 +7,13 @@ import NotFoundPage from './pages/notFoundPage'
 import MovieDetailsPage from './pages/movieDetailsPage'
 import MovieCast from './components/movieCast'
 import MovieReviews from './components/movieReviews'
+import styles from './stylesForApp.module.css'
 
 
 function App() {
 
   return (
-    <>
+    <div className={styles.container}>
       <Navigation />
       <Routes>
         <Route path='/' element={ <HomePage/> }/>
@@ -23,7 +24,7 @@ function App() {
         </Route>
       <Route path='*' element={ <NotFoundPage/>}></Route>
       </Routes>
-    </>
+    </div>
   )
 }
 

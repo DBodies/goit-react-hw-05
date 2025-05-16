@@ -1,11 +1,16 @@
 import { useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
+import { useLocation, useParams } from "react-router-dom"
 import { API_TOKEN, defaultImgForCast } from "../fetchFilmsAPI"
 import axios from "axios"
+import styles from './movieCast.module.css'
+import 'modern-normalize'
 
 export default function MovieCast() {
     const {movieId} = useParams()
     const [casts, setCasts] = useState([])
+    const location = useLocation()
+    console.log(location);
+
 
     useEffect(() => {
         if(!movieId) return
@@ -21,13 +26,13 @@ export default function MovieCast() {
 
 
     return (
-        <div>
+        <div className={styles.wrapperCast}>
             {casts.length > 0 && 
             casts.map((cast) => (
-                <div key={cast.cast_id}>
+                <div className={styles.wrapperForActors} key={cast.cast_id}>
                     <img src={`${defaultImgForCast}${cast.profile_path}`} alt=""/>
-                    <h2>{cast.name}</h2>
-                    <p>{cast.character}</p>
+                    <h2 className={styles.wrapperForActorsName}>{cast.name}</h2>
+                    <p className={styles.wrapperForActorsCharacter}>{cast.character}</p>
                 </div>
 ))}
         </div>
