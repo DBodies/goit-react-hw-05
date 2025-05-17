@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import Loader from "../components/loader";
 import NotFoundPage from "./notFoundPage";
 import { fetchFilms } from "../fetchFilmsAPI";
@@ -9,6 +9,8 @@ export default function HomePage() {
     const [dailyMovies, setDailyMovies] = useState([])
     const [loader, setLoader] = useState(false)
     const [error, setError] = useState(false)
+    const location = useLocation()
+    console.log(location);
 
     useEffect(() => {
         async function getDailyTradingFilms() {
@@ -24,15 +26,10 @@ export default function HomePage() {
             } finally {
                 setLoader(false)
             }
-
-            // axios.get(url, options)
-            //     .then((response) => setDailyMovies(response.data.results,  console.log(response)))
-            //     .catch(err => console.error(err));
             
         }
         getDailyTradingFilms()
 }, [])
-
     return (
         <>
             <h2 className={styles.homePage}>Home page</h2>
@@ -41,7 +38,10 @@ export default function HomePage() {
             <ul className={styles.movieList}>
                 {dailyMovies.map((movie) => {
                     return <li key={movie.id}>
-                        <NavLink className={styles.listForDailyMovies} to={`/moviesPage/${movie.id}`}>
+                        <NavLink className={styles.listForDailyMovies}
+                            to={`/moviesPage/${movie.id}`}
+                            state={location}
+                        >
                             {movie.title}
                         </NavLink></li>
                 })}

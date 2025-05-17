@@ -23,7 +23,6 @@ export default function MovieReviews() {
 
     return (
         <div>
-
             {reviews.length > 0 ? (
                 reviews.map((review) => (
                     <div key={review.id}>
@@ -32,14 +31,6 @@ export default function MovieReviews() {
                 </div>
                 ))
 ) : (<p>No reviews now</p>)}
-
-            {/* {reviews.length > 0 && 
-                reviews.map((review) => (
-                    <div key={review.id}>
-                        <h2>Author: {review.author}</h2>
-                        <p>{review.content}</p>
-                </div>
-            ))} */}
         </div>
     )
 };

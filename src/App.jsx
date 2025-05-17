@@ -1,20 +1,21 @@
+import { lazy, Suspense } from 'react'
 import Navigation from './components/navigation'
 import 'modern-normalize'
 import {Routes, Route} from 'react-router-dom'
-import HomePage from './pages/homePage'
-import MoviesPage from './pages/moviesPage'
-import NotFoundPage from './pages/notFoundPage'
-import MovieDetailsPage from './pages/movieDetailsPage'
-import MovieCast from './components/movieCast'
-import MovieReviews from './components/movieReviews'
 import styles from './stylesForApp.module.css'
-
+const HomePage = lazy(() => import('./pages/homePage'))
+const MoviesPage = lazy(() => import('./pages/moviesPage'))
+const NotFoundPage = lazy(() => import('./pages/notFoundPage'))
+const MovieDetailsPage = lazy(() => import('./pages/movieDetailsPage'))
+const MovieCast = lazy(() => import('./components/movieCast'))
+const MovieReviews = lazy(() => import('./components/movieReviews'))
 
 function App() {
 
   return (
     <div className={styles.container}>
       <Navigation />
+      <Suspense fallback={<p>Loading page...</p>}>
       <Routes>
         <Route path='/' element={ <HomePage/> }/>
         <Route path='/moviesPage' element={<MoviesPage />}/>
@@ -23,7 +24,8 @@ function App() {
         <Route path='reviews' element={<MovieReviews/>}/>
         </Route>
       <Route path='*' element={ <NotFoundPage/>}></Route>
-      </Routes>
+        </Routes>
+        </Suspense>
     </div>
   )
 }
