@@ -4,6 +4,8 @@ import Loader from "../components/loader";
 import NotFoundPage from "./notFoundPage";
 import { fetchFilms } from "../fetchFilmsAPI";
 import styles from './homePage.module.css'
+import MovieCast from "../components/movieCast";
+import MovieList from "./movieList";
 
 export default function HomePage() {
     const [dailyMovies, setDailyMovies] = useState([])
@@ -34,18 +36,8 @@ export default function HomePage() {
         <>
             <h2 className={styles.homePage}>Home page</h2>
             {loader && <Loader />}
-            {error && <NotFoundPage/>}
-            <ul className={styles.movieList}>
-                {dailyMovies.map((movie) => {
-                    return <li key={movie.id}>
-                        <NavLink className={styles.listForDailyMovies}
-                            to={`/moviesPage/${movie.id}`}
-                            state={location}
-                        >
-                            {movie.title}
-                        </NavLink></li>
-                })}
-            </ul>
+            {error && <NotFoundPage />}
+            <MovieList dailyMovies={dailyMovies} />
         </>
     )
 };

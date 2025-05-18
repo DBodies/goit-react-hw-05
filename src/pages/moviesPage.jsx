@@ -1,20 +1,30 @@
-import { NavLink, useLocation } from "react-router-dom";
+import { useSearchParams} from "react-router-dom";
 import SearchBar from "../components/searchbar"
 import { fetchFilmBySearch } from "../fetchFilmsAPI";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import MovieList from "./movieList";
 
 export default function MoviesPage() {
     const [films, setFilms] = useState([])
-    const location = useLocation()
+    const [searchParams, setSearchParams] = useSearchParams();
+    const query = searchParams.get("query") || ""
 
-    const handleSearch =  async (query) => {
-        try {
-            const data = await fetchFilmBySearch(query)
-            setFilms(data)
-        } catch (error) {
-            return console.error('Error', error)
+    const handleSearch = (newQuery) => {
+    setSearchParams({query: newQuery})
+}
+    
+    useEffect(() => {
+        if (!query) return
+        const getFilms = async () => {
+            try {
+                const data = await fetchFilmBySearch(query)
+                setFilms(data)
+            } catch (error) {
+                console.error('Error', error);
+            }
         }
-      }
+        getFilms()
+    })
     
     return (
         <>
@@ -22,11 +32,7 @@ export default function MoviesPage() {
                 Movie page </h2>
             
             <SearchBar onSubmit={handleSearch} />
-            <ul>
-                {films.map(film => (
-                    <li key={film.id}><NavLink to={`/moviesPage/${film.id}`} state={location}>{film.title}</NavLink></li>
-                ))}
-</ul>
+            {films.length > 0 && <MovieList dailyMovies={films} />}
         </>
     )
 };

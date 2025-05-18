@@ -34,7 +34,7 @@ const changedStyles = ({ isActive }) => {
     
     return (
         <div>
-            <NavLink  to={backLinkRef.current}><button className={styles.btnStyles}>Go back</button></NavLink>
+            <NavLink className={styles.btnStyles} to={backLinkRef.current}>Go back</NavLink>
 
             {movie && (
                 <div className={styles.wrapperForDetailPage}>
@@ -47,8 +47,8 @@ const changedStyles = ({ isActive }) => {
                 </div>
             )}
             <div>
-            <NavLink className={changedStyles} to='cast' state={location.current}>Cast</NavLink>
-                <NavLink className={changedStyles} to='reviews' state={location.current}>Reviews</NavLink>
+            <NavLink className={changedStyles} to='cast' state={backLinkRef.current}>Cast</NavLink>
+                <NavLink className={changedStyles} to='reviews' state={backLinkRef.current}>Reviews</NavLink>
             </div>
             <Outlet/>
         </div>
