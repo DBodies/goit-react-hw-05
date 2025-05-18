@@ -3,6 +3,7 @@ import { NavLink, useLocation } from 'react-router-dom'
 export default function MovieList({ dailyMovies }) {
     const location = useLocation()
     
+    
 
     return (
         <div>

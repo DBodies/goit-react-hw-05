@@ -24,7 +24,7 @@ export default function MoviesPage() {
             }
         }
         getFilms()
-    })
+    },[query])
     
     return (
         <>
